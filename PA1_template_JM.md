@@ -632,5 +632,20 @@ plot(dimnames(meanweekday)[[1]], meanweekday, type = "l", main = "Average number
 ![plot of chunk graph](figure/graph.png) 
 
 
+### New version with lattice
+
+```r
+library(lattice)
+# build a dataframe
+dfweekday = data.frame(interval = as.numeric(dimnames(meanweekday)[[1]]), steps = meanweekday, 
+    day = "weekday")
+dfweekend = data.frame(interval = as.numeric(dimnames(meanweekend)[[1]]), steps = meanweekend, 
+    day = "weekend")
+df = rbind(dfweekday, dfweekend)
+xyplot(steps ~ interval | day, data = df, layout = c(1, 2), type = "l")
+```
+
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1.png) 
+
 
 [1]: https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip "Activity Monitoring Data"

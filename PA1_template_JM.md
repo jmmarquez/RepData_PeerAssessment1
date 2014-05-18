@@ -616,9 +616,20 @@ datafilled$day = as.factor(datafilled$day)
 Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 
 ```r
-library(lattice)
+# Calculate of average number of steps taken each 5 minute interval,
+# averaged across all weekday days or weekend days
+meanweekend = tapply(datafilled$steps[datafilled$day == "weekend"], data$interval[datafilled$day == 
+    "weekend"], mean)
+meanweekday = tapply(datafilled$steps[datafilled$day == "weekday"], data$interval[datafilled$day == 
+    "weekday"], mean)
+par(mfrow = c(2, 1))
+plot(dimnames(meanweekend)[[1]], meanweekend, type = "l", main = "Average number of steps in interval of 5 minutes Weekend", 
+    xlab = "", ylab = "Steps per 5 minute")
+plot(dimnames(meanweekday)[[1]], meanweekday, type = "l", main = "Average number of steps in interval of 5 minutes Weekday", 
+    xlab = "Minute of the day", ylab = "Steps per 5 minute")
 ```
 
+![plot of chunk graph](figure/graph.png) 
 
 
 
